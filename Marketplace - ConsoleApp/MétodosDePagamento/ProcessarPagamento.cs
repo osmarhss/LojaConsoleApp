@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Marketplace___ConsoleApp.MétodosDePagamento
 {
-    internal interface IProcessarPagamento
+    public interface IProcessarPagamento
     {
-        public void ProcessarPagamento();
+        public string NomePagamento { get; }
+        public void ProcessarPagamento(decimal valor);
     }
 }

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Marketplace___ConsoleApp.MétodosDePagamento
 {
-    public class PixPagamento : IProcessarPagamento
+    public class PixPay : IProcessarPagamento
     {
+        public  string NomePagamento => "Pix";
         public static string ChavePix = "loja1@loja.com";
 
-        public void ProcessarPagamento()
+        public void ProcessarPagamento(decimal valor)
         {
-            Console.WriteLine("Processando pagamento por Pix");
+            Console.WriteLine($"Processando pagamento por Pix no valor de: {valor}");
         }
     }
 }
