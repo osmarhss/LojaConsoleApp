@@ -9,9 +9,11 @@ namespace Marketplace___ConsoleApp.Pedidos
     public enum StatusPedido
     {
         EmProcessamento = 1,
-        EmTrânsito = 2,
-        Concluída = 3,
-        Cancelada = 4,
-        Reembolsada = 5
+        PagamentoAceito,
+        PagamentoRecusado,
+        EmTrânsito,
+        Concluída,
+        Cancelada,
+        Reembolsada
     }
 }

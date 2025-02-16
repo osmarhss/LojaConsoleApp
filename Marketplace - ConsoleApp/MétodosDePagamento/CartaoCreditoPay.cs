@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Marketplace___ConsoleApp.Usuários;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,9 +25,10 @@ namespace Marketplace___ConsoleApp.MétodosDePagamento
         public string CVV { get; set; }
         public string Bandeira { get; set; }
 
-        public void ProcessarPagamento(decimal valor) 
+        public bool ProcessarPagamento(decimal valor) 
         {
             Console.WriteLine($"Processando pagamento por cartão de crédito {valor}");
+            return true;
         }
         
     }

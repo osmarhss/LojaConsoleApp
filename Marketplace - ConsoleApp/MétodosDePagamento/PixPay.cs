@@ -8,12 +8,13 @@ namespace Marketplace___ConsoleApp.MétodosDePagamento
 {
     public class PixPay : IProcessarPagamento
     {
-        public  string NomePagamento => "Pix";
+        public string NomePagamento => "Pix";
         public static string ChavePix = "loja1@loja.com";
 
-        public void ProcessarPagamento(decimal valor)
+        public bool ProcessarPagamento(decimal valor)
         {
             Console.WriteLine($"Processando pagamento por Pix no valor de: {valor}");
+            return true;
         }
     }
 }
