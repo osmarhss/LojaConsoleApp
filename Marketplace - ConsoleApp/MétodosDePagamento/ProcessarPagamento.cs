@@ -9,6 +9,6 @@ namespace Marketplace___ConsoleApp.MétodosDePagamento
     public interface IProcessarPagamento
     {
         public string NomePagamento { get; }
-        public void ProcessarPagamento(decimal valor);
+        public bool ProcessarPagamento(decimal valor);
     }
 }

@@ -12,7 +12,7 @@ namespace Marketplace___ConsoleApp.MétodosDePagamento
         public static string EnderecoOnChain = "jf298A3b5ueH938hNj03jG19dh2";
         public static string EnderecoLightning = "iWHjui7yd7qfuqgh7TDYYghd2ajh3H1i75U2yiH";
 
-        public void ProcessarPagamento(decimal valor) 
+        public bool ProcessarPagamento(decimal valor) 
         {
             if (valor < 500) 
             {
@@ -24,6 +24,7 @@ namespace Marketplace___ConsoleApp.MétodosDePagamento
             }
             Console.ReadKey();
             Console.WriteLine($"Processando pagamento por Bitcoin no valor de: {valor}");
+            return true;
         }
     }
 }
