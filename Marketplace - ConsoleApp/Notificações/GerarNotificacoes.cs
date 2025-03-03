@@ -35,8 +35,13 @@ namespace Marketplace___ConsoleApp.Notificações
             {
                 if(produto.Condicoes.EmPreVenda)
                     Console.WriteLine($"O produto: {produto.Fabricante} {produto.Nome} entrou em pré-venda!");
-                if(produto.Condicoes.EmPromocao)
-                    Console.WriteLine($"O produto: {produto.Fabricante} {produto.Nome} entrou em promoção!");
+
+                if (e.Clientes != null)
+                {
+                    var clientesInteressados = e.Clientes.Where(p => p.ListaDeDesejos.Contains(produto));
+                    // Simular algo que enviasse apenas para os clientes na coleção criada
+                    Console.WriteLine("Um produto da sua lista de desejos entrou em promoção!");
+                }
             }
         }
     }
@@ -44,6 +49,7 @@ namespace Marketplace___ConsoleApp.Notificações
     public class GerarNotificacoesEventArgs<T> : EventArgs 
     {
         public Cliente? Cliente { get; set; }
+        public List<Cliente>? Clientes { get; set; }
         public T? Value { get; set; }
     }
 }
