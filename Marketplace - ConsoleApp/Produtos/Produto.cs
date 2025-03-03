@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Marketplace___ConsoleApp.Notificações;
+using Marketplace___ConsoleApp.Usuários;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +18,7 @@ namespace Marketplace___ConsoleApp.Produtos
             Categoria = categoria;
             Estoque = estoque;
             Preco = preco;
+            HistoricoDePrecos = new List<decimal>() { preco };
             Condicoes = new ProdutoCondicaoEspecial() { EmPreVenda = emPreVenda, EmPromocao = emPromocao};
         }
 
@@ -25,7 +28,31 @@ namespace Marketplace___ConsoleApp.Produtos
         public CategoriasProduto Categoria { get; set; }
         public int Estoque { get; set; }
         public decimal Preco { get; set; }
+        public List<decimal> HistoricoDePrecos { get; set; }
         public ProdutoCondicaoEspecial Condicoes { get; set; }
+        public EventHandler<GerarNotificacoesEventArgs<Produto>> NotificarCondicaoEspecialProduto { get; set; }
+
+        public void ProdutoEmPromocao(IEnumerable<Cliente> cs, DateTime dataPromo, decimal preco) 
+        {
+            if (Condicoes.HistoricoDePromocoes == null)
+                Condicoes.HistoricoDePromocoes = new List<DateTime>();
+
+            if (Condicoes.EmPromocao)
+            {
+                Console.WriteLine("Produto já está em promoção!");
+            }
+            else
+            {
+                Condicoes.HistoricoDePromocoes.Add(dataPromo);
+                Condicoes.EmPromocao = true;
+                Preco = preco;
+
+                if (NotificarCondicaoEspecialProduto != null)
+                {
+                    NotificarCondicaoEspecialProduto(this, new GerarNotificacoesEventArgs<Produto>() { Clientes = new List<Cliente>(cs), Value = this });
+                }
+            }
+        }
 
         //Simulando fonte de dados obtidos por um banco de dados
         public static List<Produto> GetProdutos()
@@ -50,7 +77,7 @@ namespace Marketplace___ConsoleApp.Produtos
 
         public override string ToString()
         {
-            return $"Nome: {Nome}\t Fabricante: {Fabricante}\t Tipo: {Categoria}\t Preco: {Preco}";
+            return $"Nome: {Nome}\r\n Fabricante: {Fabricante}\r\n Tipo: {Categoria}\r\n Preco: {Preco}";
         }
 
     }
@@ -58,6 +85,7 @@ namespace Marketplace___ConsoleApp.Produtos
     public class ProdutoCondicaoEspecial 
     {
         public bool EmPromocao { get; set; }
+        public List<DateTime>? HistoricoDePromocoes { get; set; }
         public bool EmPreVenda { get; set; }
     }
 }

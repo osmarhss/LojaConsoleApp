@@ -91,9 +91,23 @@ namespace Marketplace___ConsoleApp.Pedidos
 
             return res;
         }
+
+        public string GerarComprovanteTXT(Cliente c) 
+        {
+            string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+            try
+            {
+                File.WriteAllText(downloadPath + $"comprovante{Id}.txt", $"Comprovante de pagamento: {Environment.NewLine + c.ToString() + Environment.NewLine + this.ToString()}");
+                return "Comprovante salvo com sucesso!";
+            }
+            catch (Exception e) 
+            {
+                return e.Message;
+            }
+        }
         public override string ToString()
         {
-            return $"Meu pedido: \t Id: {Id} \t Produto: {Produto.Nome} \t Meio de Pagamento: {MeioDePagamento.NomePagamento}";
+            return $"Meu pedido: \n Id: {Id} \r\n Produto: {Produto.Nome} \n Meio de Pagamento: {MeioDePagamento.NomePagamento}";
         }
 
     }
